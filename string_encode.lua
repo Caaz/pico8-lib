@@ -1,5 +1,9 @@
--- require binary.lua
--- require string.lua
+-- require binary/pull
+-- require binary/itb
+-- require table/concat
+-- require string/index_of
+-- require string/string_rle
+-- require string/string_rld
 
 local encoding = '=abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()[]{}<>./;"\\|`~-_+'
 

@@ -1,5 +1,5 @@
 _ichor = {
-  version = '0.99.99.32.2-rc7',
+  version = '1.0.0',
   order = {},
   modules = {},
   update = function() _ichor('update') end,

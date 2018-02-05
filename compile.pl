@@ -20,22 +20,27 @@ sub parse {
 
   open(my $code, '<:encoding(Windows-1252)', $cart_file)
   or warn "Could not open file '$cart_file' for reading. $!";
-
+  my $line = 0;
   while(my $row = <$code>) {
+    $line++;
     my @expect_copy = @$expected;
     my $i = 0;
-    foreach my $pattern (@expect_copy) {
-      if($row =~ /$pattern/) {
+    foreach my $arr (@expect_copy) {
+      # my @expect = @$arr;
+      if($row =~ /$$arr[1]/) {
         # print "removing expected pattern $pattern\n";
         splice @$expected, $i, 1;
         $i--;
       }
       $i++;
     }
+    if($row =~ /[A-Z]/) {
+      print "Uppercase character in $cart_file, $line\n";
+    }
     if($row =~ /^\s*\-\- expect (.*?)$/) {
-      my $expect
-      = $1;
-      push(@$expected,$expect);
+      my $expect = $1;
+      my @expect = ($cart_file,$expect);
+      push(@$expected,\@expect);
       # print "Adding expected pattern $expect\n";
     } elsif($row =~ /^\s*\-\- require (.+?)$/) {
       my $original = $1;
@@ -50,7 +55,7 @@ sub parse {
       }
       unless($require ~~ @$required) {
         push(@$required,$require);
-        # print "Requiring $original\n";
+        # print "Requiring $original from $cart_file\n";
         open my ($output_row), '>', \$row;
         parse($require, $output_row, $required, $expected);
         close $output_row;
@@ -79,7 +84,7 @@ while(1) {
   print "Remaining expected patterns ".@expected."\n";
   if(@expected > 0) {
     foreach my $expected (@expected) {
-      print "$expected\n";
+      print((join ": ", @$expected)."\n");
     }
   }
   print "\n";
