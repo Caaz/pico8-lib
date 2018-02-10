@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 use File::Spec;
 use File::Basename;
-# use POSIX;
+use POSIX;
 use Cwd 'abs_path';
 
 use warnings;
@@ -70,9 +70,9 @@ sub death {
   die "\nCaught interrupt, killed fifo.";
 }
 
-# mkfifo($fifo_name,0777);
-# foreach('ABRT','QUIT','KILL','INT','ABRT','HUP') { $SIG{$_} = \&death; }
-# while(1) {
+mkfifo($fifo_name,0777);
+foreach('ABRT','QUIT','KILL','INT','ABRT','HUP') { $SIG{$_} = \&death; }
+while(1) {
   open(my $fifo, '>:encoding(Windows-1252)', $fifo_name) or die $!;
   print localtime." -- Compiling...\n";
   my @required = ();
@@ -87,6 +87,6 @@ sub death {
       print((join ": ", @$expected)."\n");
     }
   }
-  # print "\n";
-  # sleep(1);
-# }
+  print "\n";
+  sleep(1);
+}
