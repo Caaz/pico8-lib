@@ -1,4 +1,5 @@
 -- require table/concat
+-- require binary/itb
 
 function bits_from(size,values)
   local bits = {}

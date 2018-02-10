@@ -1,3 +1,6 @@
+-- require string_encode
+-- require binary/bits_from
+
 function debug(t,indent)
   local tab = (indent and indent or '')
   local ty = type(t)
@@ -25,6 +28,14 @@ function bits_as_string(bits)
   return string
 end
 
+function compress(size,table)
+  for k,v in pairs(table) do
+    table[k] = bits_to_string(bits_from(size,v))
+  end
+  return table
+end
+
 -- expect debug
 -- expect debugp
 -- expect bits_as_string
+-- expect compress
