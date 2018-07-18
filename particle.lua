@@ -20,6 +20,10 @@ class_particle = class{
     this.x += this.vel_x
     this.y += this.vel_y
     if rnd() < this.decay then this.size -= .5 end
+    if this.life then
+      this.life -= 1
+      if this.life == 0 then this.system:del(this) end
+    end
     if this.size < 0 then this.system:del(this) end
   end,
   draw = function(this)
