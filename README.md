@@ -1,10 +1,27 @@
 # PICO-8 Libraries!
 
-This is just a small collection of libraries and a compiler script for PICO-8
+## What is this?
 
-I have this repository at the root of my carts folder, labeled libs.
+This is just a small collection of libraries and a compiler script for PICO-8. Code not by me is in the vendor folder, these can be any number of things and hopefully credit is given in the files. If not, I fully apologize and will try my best to fix that.
 
-Here's an example of use in a cart
+## Usage
+
+If you're working in a git project, then you can add this project as a git submodule. This is the preferred method.
+
+- `git submodule add https://github.com/Caaz/pico8-lib lib`
+  - lib is important here, as the compiler script expects these files to be in a folder called lib.
+
+Otherwise, simply download the project and place it in a folder called lib at whatever working directory you might want.
+
+To compile a distributable cart, use the compile script like so
+
+- `perl lib/compile.pl your_base_cart.p8 output.p8`
+
+Alternatively, if you're working on a cart, you can instead use `lib/live-compile.pl`, which will create a FIFO cart, which will compile the cart when you load or reload the cart from PICO-8
+
+## Example
+
+Here's an example of use in a cart, though this very much might be an outdated example function wise, the require statements are exactly the same, and likely will not change.
 
 ```lua
 
@@ -13,6 +30,7 @@ Here's an example of use in a cart
 -- require string_encode
 function expand(size,table)
   for k,v in pairs(table) do
+    -- these functions are imported from other things!
     table[k] = bits_to(size, bits_from_string(v))
   end
   return table
@@ -57,8 +75,3 @@ _ichor
 .set_order('test',{'cls','fade','stats'})
 .set_state('test')
 ```
-To compile, I run the script `compile.pl` with an argument pointing at this cart, like so
-
-`perl lib/compile.pl fade.p8`
-
-in PICO-8 I can then load the fifo.p8 cart it produces and the script will compile it automagically.
