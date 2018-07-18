@@ -6,12 +6,22 @@ This is just a small collection of libraries and a compiler script for PICO-8. C
 
 ## Usage
 
+### Installing via Submodule
+
 If you're working in a git project, then you can add this project as a git submodule. This is the preferred method.
 
 - `git submodule add https://github.com/Caaz/pico8-lib lib`
   - lib is important here, as the compiler script expects these files to be in a folder called lib.
 
-Otherwise, simply download the project and place it in a folder called lib at whatever working directory you might want.
+You can update the libraries by using submodule commands as well
+
+- `git submodule update --recursive --remote`
+
+### Installing via ZIP
+
+Otherwise, simply download the project and place it in a folder called lib at whatever working directory you might want. Your current working directory matters as that's what the compile script looks at for the library.
+
+### Compiling
 
 To compile a distributable cart, use the compile script like so
 
