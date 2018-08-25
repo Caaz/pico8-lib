@@ -16,8 +16,8 @@ camera = (function()
     -- smooth the camera movement towards our focus position
     update = function(this)
       -- the 10s here can be changed to a lower value to speed it up
-      this.x += (this.focus_x - this.x)/10
-      this.y += (this.focus_y - this.y)/10
+      this.x += flr((this.focus_x - this.x)/20+.5)
+      this.y += flr((this.focus_y - this.y)/20+.5)
     end,
     -- set our focus to some point
     focus = function(this,x,y)

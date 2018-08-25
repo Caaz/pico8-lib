@@ -6,10 +6,10 @@ function class(base)
   return base
 end
 
-function instantiate(class, arguments)
+function instantiate(class, ...)
   local instance = {}
   setmetatable(instance,{ __index = class })
-  instance:new(arguments)
+  instance:new(...)
   return instance
 end
 
