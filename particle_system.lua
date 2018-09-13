@@ -1,26 +1,21 @@
 -- require particle
-_ichor.add('particle_system', {
-  init = function(this)
-    this.particles = {}
+-- require table/forall
+_ps = {
+  ps =  {},
+  add = function(t, p)
+    -- printh('adding '..p)
+    p.parent = t
+    add(t.ps, p)
+    p:init()
   end,
-  add = function(this, particle)
-    particle.system = this
-    add(this.particles, particle)
-    particle:init()
+  del = function(t, p)
+    del(t.ps, p)
+    p:destroy()
   end,
-  del = function(this, particle)
-    del(this.particles, particle)
-    particle:destroy()
+  update = function(t)
+    forall(t.ps,'update')
   end,
-  update = function(this)
-    this:all('update')
-  end,
-  draw = function(this)
-    this:all('draw')
-  end,
-  all = function(this, key)
-    for particle in all(this.particles) do
-      particle[key](particle,key)
-    end
+  draw = function(t)
+    forall(t.ps,'draw')
   end
-})
+}

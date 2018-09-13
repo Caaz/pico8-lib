@@ -1,9 +1,8 @@
--- require class
 -- require table/merge
 
-class_particle = class{
+_particle = _{
   new = function(this, args)
-    merge(this,{
+    merge(this,{{
       vel_x = 0,
       vel_y = 0,
       x = 0,
@@ -11,20 +10,20 @@ class_particle = class{
       size = 3,
       decay = .5,
       color = 7,
-    })
-    merge(this,args)
+    },args})
   end,
   init = function(this) end,
   destroy = function(this) end,
   update = function(this)
+    -- printh('aaaaa!')
     this.x += this.vel_x
     this.y += this.vel_y
     if rnd() < this.decay then this.size -= .5 end
     if this.life then
       this.life -= 1
-      if this.life == 0 then this.system:del(this) end
+      if this.life == 0 then this.parent:del(this) end
     end
-    if this.size < 0 then this.system:del(this) end
+    if this.size < 0 then this.parent:del(this) end
   end,
   draw = function(this)
     if this.size < 1 then pset(this.x,this.y,this.color)

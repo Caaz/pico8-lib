@@ -1,16 +1,16 @@
-function class(base)
-  setmetatable(base, {
-    __call = instantiate,
-    __index = base.extends
-  })
-  return base
-end
-
-function instantiate(class, ...)
-  local instance = {}
-  setmetatable(instance,{ __index = class })
-  instance:new(...)
-  return instance
-end
-
+class = (function()
+  local i = function(c, ...)
+    local t = {}
+    setmetatable(t,{ __index = c })
+    t:new(...)
+    return t
+  end
+  return function(a)
+    setmetatable(a, {
+      __call = i,
+      __index = a.extends
+    })
+    return a
+  end
+end)()
 -- expect class
