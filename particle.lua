@@ -2,7 +2,7 @@
 
 _particle = _{
   new = function(this, args)
-    merge(this,{{
+    merge(this,{
       vel_x = 0,
       vel_y = 0,
       x = 0,
@@ -10,10 +10,10 @@ _particle = _{
       size = 3,
       decay = .5,
       color = 7,
-    },args})
+    },args)
   end,
-  init = function(this) end,
-  destroy = function(this) end,
+  -- init = function(this) end,
+  -- destroy = function(this) end,
   update = function(this)
     -- printh('aaaaa!')
     this.x += this.vel_x
