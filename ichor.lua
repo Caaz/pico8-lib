@@ -7,7 +7,7 @@
 _ = {
   -- state management
   states={},
-  main=function(f)local s=_.states[_.s]if s[f]then s[f](s)end end,
+  main=function(f) local s=_.states[_.s]if(s[f])then s[f](s) end end,
   state=function(s)_.s=s _.main'init'end,
 
   -- object oriented programming interface
