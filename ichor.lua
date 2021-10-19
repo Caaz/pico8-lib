@@ -1,8 +1,6 @@
 -- name: ichor
--- version: 1.2.1
+-- version: 1.2.2
 -- description: handles game state, and provides object oriented functionality.
-
--- require table/merge
 
 _ = {
   -- state management
@@ -12,7 +10,7 @@ _ = {
 
   -- object oriented programming interface
   __call=function(t,a)
-    a.new=a.new or merge
+    a.new = a.new or a.extends and a.extends.new or merge
     setmetatable(a,{
       __index=a.extends,
       __call=function(c,...)
