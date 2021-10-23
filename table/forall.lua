@@ -1,5 +1,5 @@
 function forall(t,f,...)
   for e in all(t) do
-    e[f](e,...)
+    if e[f] then e[f](e,...) end
   end
 end
