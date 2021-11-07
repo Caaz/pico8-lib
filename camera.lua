@@ -17,8 +17,8 @@ camera = (function()
     update = function(this)
       -- the 10s here can be changed to a lower value to speed it up
       -- local x,y = this.x, this.y
-      this.x += (this.focus_x - this.x)/5--+.5
-      this.y += (this.focus_y - this.y)/5--+.5
+      this.x = this.x + (this.focus_x - this.x)/5--+.5
+      this.y = this.y + (this.focus_y - this.y)/5--+.5
       -- return x == this.x and y == this.y
     end,
     -- set our focus to some point

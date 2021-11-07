@@ -10,7 +10,7 @@ function sort(a, compare)
     for j=lo,hi-1 do
       if compare(a[j], pivot) then
         a[i],a[j]=a[j],a[i]
-        i+=1
+        i=i+1
       end
     end
     a[i],a[hi]=a[hi],a[i]
