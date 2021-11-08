@@ -1,5 +1,5 @@
 -- we're gonna use an anonymous function here, to contain the scope of our shenanigans
-camera = (function()
+camera = (function(width, height)
   -- let's get a reference to the original pico8 camera, so we can use it later.
   local p8camera = camera
   -- alright let's make our table
@@ -29,7 +29,7 @@ camera = (function()
     -- apply the canvas' camera!
     apply = function(this)
       -- we use -64 here because we want whatever we're trying to focus on in the center of the screen.
-      camera(this.x - 64, this.y - 64)
+      camera(this.x - width/2, this.y - height/2)
     end
   }
   -- set our metatable with a __call value set to use the original camera.
@@ -37,4 +37,4 @@ camera = (function()
   setmetatable(camera_enhanced,{ __call = function(this,x,y) p8camera(x,y) end })
   -- return the enhanced camera!
   return camera_enhanced
-end)()
+end)(screen_width and screen_width or 128, screen_height and screen_height or 128)
