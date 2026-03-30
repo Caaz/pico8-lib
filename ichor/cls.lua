@@ -1,1 +1,4 @@
-.add('cls', { draw = cls })
+_cls = _{
+  extends=node,
+  draw = cls
+}
