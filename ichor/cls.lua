@@ -1,4 +1,4 @@
 _cls = _{
-  extends=node,
+  extends=_node,
   draw = cls
 }
