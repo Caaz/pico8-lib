@@ -4,6 +4,7 @@ function join(table, joiner, property)
   for item in all(table) do
     value = property and item[property] or item
     value = type(value)=="function" and value(item) or value
+    value = tostring(value)
     if not string then
       string = ""..value
     else
