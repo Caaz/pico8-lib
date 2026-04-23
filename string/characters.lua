@@ -6,5 +6,3 @@ function characters(string)
     end
   end, nil, 0
 end
-
--- expect characters

@@ -7,20 +7,6 @@ _node = _{
       children = {}
     },...)
   end,
-  deli = function(t, i)
-    local n = t.children[i]
-    if n then
-      deli(t.children, i)
-      n.parent = nil
-      n:_s_call'removed'
-      return n
-    end
-  end,
-  add = function(t, n)
-    add(t.children, n)
-    n.parent = t
-    n:_s_call'ready'
-  end,
   global_position=function(t)
     local position = t.position()
     if (t.top_level) return position
@@ -28,20 +14,45 @@ _node = _{
     return position
   end,
   _update=function(t)
-    t:_s_call'update'
+    t:safe_call'update'
     forall(t.children, '_update')
   end,
   _draw=function(t, offset)
-    if(not t.reverse_draw_order) t:_s_call('draw')
+    if(not t.reverse_draw_order) t:safe_call('draw')
     forall(t.children, '_draw')
-    if(t.reverse_draw_order) t:_s_call('draw')
+    if(t.reverse_draw_order) t:safe_call('draw')
   end,
   -- safe call, calls function only if it exists
-  _s_call = function(t, f, ...)
+  safe_call = function(t, f, ...)
     if (t[f]) t[f](t, ...)
   end,
+  -- adds child to children
+  add_child = function(t, n)
+    assert(n, "nil node added.")
+    n.parent = t
+    add(t.children, n)
+    n:safe_call'added'
+  end,
+  create_tween = function(t,...)
+    local tween = _tween(...)
+    t:add_child(tween)
+    return tween
+  end,
+  -- removes child from children, but doesn't free it.
+  remove_child = function(t, child)
+    child.parent = nil
+    del(t.children, child)
+    t:safe_call'removed'
+  end,
+  -- frees this node from memory.
   free = function(t)
-    del(t.parent.children, t)
-    t:_s_call'removed'
+    for child in all(t.children) do
+      child:free()
+    end
+    t.parent:remove_child(t)
+    for key, value in pairs(t) do
+      t[key] = nil
+    end
+    t.freed = true
   end
 }

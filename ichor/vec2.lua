@@ -31,14 +31,17 @@ _vec2 = _{
   multiply = function(t, by)
     t.x *= by
     t.y *= by
+    return t
   end,
   add = function(t,by)
     t.x += by.x
     t.y += by.y
+    return t
   end,
   sub = function(t,by)
     t.x -= by.x
     t.y -= by.y
+    return t
   end,
   meta = {
     __add = function(a, b)

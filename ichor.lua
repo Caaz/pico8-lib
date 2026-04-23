@@ -1,10 +1,8 @@
 -- name: ichor
--- version: 2.0.0
+-- version: 2.0.1
 -- description: handles game state, and provides object oriented functionality, and a node system.
 
 _ = {
-  -- state management
-  root=nil,
   -- object oriented programming interface
   __call=function(t,a)
     a.new = a.new or a.extends and a.extends.new or merge

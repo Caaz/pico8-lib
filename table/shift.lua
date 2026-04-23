@@ -1,6 +1,6 @@
 function shift(table)
   local element = table[1]
-  del(table,element)
+  deli(table,1)
   return element
 end
 

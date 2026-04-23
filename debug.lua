@@ -26,7 +26,7 @@ end
 function debugp(t) printh(debug(t)) end
 
 function bits_as_string(bits)
-  local string = ''
+  local string = bits[0] and ''..1 or ''
   for bit in all(bits) do
     string = string..(bit and 1 or 0)
   end
