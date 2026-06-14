@@ -23,7 +23,7 @@ function debug(t,depth,indent)
     return '('..ty..')'
   end
 end
-function debugp(t) printh(debug(t)) end
+function debugp(...) printh(debug(...)) end
 
 function bits_as_string(bits)
   local string = bits[0] and ''..1 or ''

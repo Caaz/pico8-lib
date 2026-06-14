@@ -1,31 +1,30 @@
 _box_container = _{
-  extends = _control,
+  _control,
   new = function(t, ...)
     _control.new(t, {
-      gap = 2,
+      g = 2,
       -- 0: top, 1: center, 2: bottom
       alignment = 1,
-      horizontal = true,
+      h = false,
     }, ...)
   end,
-  reflow = function(t)
+	added = function(t) t:reflow() end,
+  reflow = function(_ENV)
     -- max height of children
-    local axis = t.horizontal and 'y' or 'x'
-    local anti_axis = t.horizontal and 'x' or 'y'
-    local max_size = 0
-    for child in all(t.children) do
-      child:safe_call'reflow'
-      max_size = max(max_size, child.size[axis])
-    end
-    t.size[axis] = max_size + t.margin[axis]*2
+    local a, aa, m = h and 'y' or 'x',  h and 'x' or 'y', 0
+    foreach(children, function(c)
+      c:safe_call'reflow'
+      m = max(m, c.size[a])
+    end)
+    size[a] = m + margin[a]*2
     -- set position of child nodes
     local offset = 0
-    for child in all(t.children) do
-      child.position[anti_axis] = offset + t.margin[anti_axis]
-      child.position[axis] = (t.alignment == 0 and t.margin[axis] or t.alignment == 1 and t.size[axis]/2-child.size[axis]/2 or t.size[axis]-child.size[axis]) 
-      offset += child.size[anti_axis] + t.gap
-    end
+    foreach(children, function(c)
+      c.position[aa] = offset + margin[aa]
+      c.position[a] = (alignment == 0 and margin[a] or alignment == 1 and size[a]/2-c.size[a]/2 or size[a]-c.size[a]) 
+      offset += c.size[aa] + g
+    end)
     -- set size of self
-    t.size[anti_axis] = offset - t.gap + t.margin[anti_axis]*2
+    size[aa] = offset - g + margin[aa]*2
   end
 }

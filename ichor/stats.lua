@@ -1,7 +1,7 @@
 _stats = _{
-  extends=_node,
+  _node,
   info = {
-    function() return 'mem '..(stat(0)/2048)..'%' end,
+    function() return 'mem '..(stat(0)/20.48)..'%' end,
     function() return 'cpu '..(stat(1)*100)..'%' end,
   },
   ready = function(this)

@@ -1,8 +1,8 @@
--- require characters
+-- require chars
 
 function string_rld(string)
   local output,run,running,last_char = '','',false,''
-  for i, char in characters(string) do
+  for i, char in chars(string) do
     if char == ':' then
       running = not running
       if not running then

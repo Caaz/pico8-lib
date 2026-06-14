@@ -1,8 +1,8 @@
--- require string/characters
+-- require string/chars
 
 function string_rle(string)
   local buffer,output,last_char = '',''
-  for i, char in characters(string) do
+  for i, char in chars(string) do
     if char == last_char then
       buffer = buffer..char
     else

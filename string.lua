@@ -1,4 +1,4 @@
--- require string/characters
+-- require string/chars
 -- require string/index_of
 -- require string/string_rle
 -- require string/string_rld

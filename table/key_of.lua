@@ -1,9 +1,6 @@
-function key_of(element,table)
-  for key, value in pairs(table) do
-    if value == element then
-      return key
-    end
-  end
-  return -1
+function key_of(e,t)
+	for k,v in next,t do
+		if (v == e) return k
+	end
+	return -1
 end
--- expect key_of

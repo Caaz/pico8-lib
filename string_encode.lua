@@ -18,6 +18,16 @@ function bits_to_string(bits)
   return string_rle(string)
 end
 
+function bits_to_string_full(bits)
+  local string = ''
+  while(#bits > 0) do
+    -- local id = pull(bits,8)+1c
+    chr()
+    string = string..chr(pull(bits,8))
+  end
+  -- print('run length encoding...')
+  return string_rle(string)
+end
 -- function bytes_to_string(bytes)
 --   local string = ''
 --   local bits = {}
@@ -36,8 +46,15 @@ end
 
 function bits_from_string(string)
   local bits = {}
-  for i, char in characters(string_rld(string)) do
+  for i, char in chars(string_rld(string)) do
     concat(bits, itb(index_of(char, encoding)-1, 6))
+  end
+  return bits
+end
+function bits_from_string_full(string)
+  local bits = {}
+  for i, char in chars(string_rld(string)) do
+    concat(bits, itb(ord(char), 8))
   end
   return bits
 end

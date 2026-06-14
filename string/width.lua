@@ -1,8 +1,8 @@
--- gets the width in pixels for a given string, accounting for large printing characters
+-- gets the width in pixels for a given string, accounting for large printing chars
 function string_width(string)
-  local x = 0
-  for k, v in characters(string) do
-    x += ord(v) < 128 and 4 or 8
-  end
-  return x - 1
+	local x = 0
+	for k, v in chars(string) do
+		x += ord(v) < 128 and 4 or 8
+	end
+	return x - 1
 end

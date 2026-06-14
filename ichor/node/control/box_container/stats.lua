@@ -1,5 +1,6 @@
+_stats = {value={fps=1}}
 _stats = _{
-  extends = _box_container,
+  _box_container,
   stats = {},
   new = function(t,...)
     _box_container.new(t, {
@@ -10,7 +11,8 @@ _stats = _{
       margin = _vec2(2,2),
       gap = 1,
       stat = {
-        mem=function() return stat(0)/1024 end,
+        delta=function() return 1/_stats.value.fps end,
+        mem=function() return stat(0)/20.48 end,
         cpu=function() return stat(1)*100 end,
         fps=7,
         -- local times
@@ -22,33 +24,26 @@ _stats = _{
         second=95,
         -- tick = function() return _stats.tick end,
       },
+      value = {},
       tick = 0,
       hide = true,
     },...)
+    t:update()
     menuitem(1,'toggle stats', function() t.hide = not t.hide end)
   end,
   update= function(t)
-    if (t.hide) return
     local index = 0
     for key, value in pairs(t.stat) do
       index += 1
       local result = type(value) == 'number' and stat(value) or value()
-      t.stats[key] = result
+      t.value[key] = result
       if #t.children < index then
-        t:add_child(_label{})
+        t:add(_label{})
       end
       t.children[index].text = key..": "..result
     end
     t.tick += 1
+    if (t.hide) return
     t:reflow()
-    
   end,
 }()
-_map = _{
-  extends = _node,
-  draw = function(t)
-    cls()
-    -- map(0,0,0,0,16,16)
-    -- print()
-  end,
-}

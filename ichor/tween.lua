@@ -1,7 +1,7 @@
 -- requires lerp, unless something else is defined
 
 _tween = _{
-  extends = _node,
+  _node,
   new = function(t,...)
     _node.new(t,{
       -- lifetime in frames

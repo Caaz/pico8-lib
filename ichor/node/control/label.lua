@@ -1,23 +1,25 @@
 _label = _{
-  extends = _control,
-  new = function(t, ...)
-    _control.new(t, {
-      text="hello, world",
-      color=7,
-    }, ...)
-    t:reflow()
+  _control,
+  new = function(_ENV, at,ac,ao)
+    _control.new(_ENV, {
+      text=at,
+      c=ac or 7,
+			o=ao or 0
+    })
+    _ENV:reflow()
   end,
-  -- set_text = function(t, text)
-  --   t.text = text
-  --   t:reflow()
-  -- end,
-  reflow = function(t)
-    t.size.x = string_width(t.text) + t.margin.x*2
-    t.size.y = 5 + t.margin.y*2
+  reflow = function(_ENV)
+    size = _vec2(
+      string_width(text) + margin.x*2,
+      5 + margin.y*2
+    )
   end,
-  draw = function(t) 
-    local g_position = t:global_position()
-    -- rect(t.position.x, t.position.y, t.size.x-1, t.size.y-1, 5)
-    print(t.text, g_position.x+t.margin.x, g_position.y+t.margin.y, t.color)
+  draw = function(_ENV)
+    local g,output = _ENV:global_position(),text
+		_control.draw(_ENV)
+		if o != 1 then
+			output = "\^o"..hex(o).."ff"..text
+		end
+    print(output, g.x+margin.x, g.y+margin.y, o==1 and 14 or c)
   end
 }

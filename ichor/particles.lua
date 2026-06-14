@@ -1,5 +1,5 @@
 _particle = _{
-  extends = _node,
+  _node,
   new = function(t, a)
     _node.new(t, {
       active = false,
@@ -44,7 +44,7 @@ _particle = _{
 }
 
 _particle_system = _{
-  extends = _node,
+  _node,
   new = function(t, class, count)
     _node.new(t, {
       count = count or 64,

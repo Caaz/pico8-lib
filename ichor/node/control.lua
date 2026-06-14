@@ -1,5 +1,5 @@
 _control = _{
-  extends = _node,
+  _node,
   new = function(t, ...)
     _node.new(t, {
       size = _vec2(4,4),
@@ -8,20 +8,20 @@ _control = _{
       hide = false,
     }, ...)
   end,
-  _draw=function(t)
-    if (t.hide) return
-    _node._draw(t)
+  _draw=function(_ENV)
+    if (hide) return
+    _node._draw(_ENV)
   end,
-  draw_bounds = function(t)
-    local g = t:global_position()
-    rect(g.x, g.y, g.x+t.size.x-1, g.y+t.size.y-1, t.debug_color)
+  -- draw_bounds = function(_ENV)
+  --   local g = _ENV:global_position()
+  --   rect(g.x, g.y, g.x+size.x-1, g.y+size.y-1, debug_color)
+  -- end,
+  draw_panel = function(_ENV)
+    local g = _ENV:global_position()
+    panel:draw(g.x, g.y, g.x+size.x-1+margin.x*2, g.y+size.y-1+margin.y*2)
   end,
-  draw_panel = function(t)
-    local g = t:global_position()
-    t.panel:draw(g.x, g.y, g.x+t.size.x-1, g.y+t.size.y-1, t.debug_color)
-  end,
-  draw = function(t)
-    if (t.panel) t:draw_panel()
+  draw = function(_ENV)
+    if (panel) _ENV:draw_panel()
   end
 }
 -- rules

@@ -1,7 +1,5 @@
-function shift(table)
-  local element = table[1]
-  deli(table,1)
-  return element
+function shift(t)
+	local e = t[1]
+	deli(t,1)
+	return e
 end
-
--- expect shift

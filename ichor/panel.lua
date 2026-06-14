@@ -1,12 +1,11 @@
 _panel = _{
-  new = function(t,...)
-    merge(t, {
-      border_color = 7,
-      fill_color = 1,
-    }, ...)
+  new = function(_ENV,fi,bo)
+		f = fi and fi or -1
+		b = bo and bo or -1
+		printh(f)
   end,
-  draw = function(t, x, y, ex, ey)
-    rectfill(x, y, ex, ey, t.fill_color)
-    rect(x, y, ex, ey, t.border_color)
+  draw = function(_ENV, x, y, ex, ey)
+    rectfill(x, y, ex, ey, f)
+    if (b!=-1) rect(x, y, ex, ey, b)
   end
 }
